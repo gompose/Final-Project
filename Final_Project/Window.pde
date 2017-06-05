@@ -6,23 +6,26 @@ public class Window {
  public ArrayList<DynamicObject> everyDynamic;
  public int xMax;// Size of Screen
  public int yMax;// Size of Screen
+ public float scale; // Scale of everything.
  //-----------------> Constructors
  public Window () {
    xMax = 500;
    yMax = 500;
+   scale = 0.1;
    gravity = 9.8;
    everyDynamic = new ArrayList<DynamicObject>();
  }
  public Window (int _xMax, int _yMax, float _gravity) {
    xMax = _xMax;
    yMax = _yMax;
+   scale = 0.1;
    gravity = _gravity;
    everyDynamic = new ArrayList<DynamicObject>();
  }
  //----------------> Object Maker Methods
  public void makeBall(int x, int y, int _radius) {
    // Creates a ball object, and adds it to everyDynamic.
-   Ball a = new Ball(x, y, _radius, gravity);
+   Ball a = new Ball(x, y, _radius, gravity * scale);
    everyDynamic.add(a);
  }
  
@@ -54,7 +57,6 @@ public class Window {
  }
  public void bounceVertical(DynamicObject obj) {
    if(obj.velocity.y < 0.001) {
-     obj.velocity.y = 0;
    }
    obj.velocity.y = obj.velocity.y * -1.0;
  }
@@ -63,5 +65,9 @@ public class Window {
      obj.velocity.x = 0;
    }
     obj.velocity.x = obj.velocity.x * -1.0;
+ }
+ public boolean isColliding() {
+   return true;
+   // Not Finished
  }
 }
