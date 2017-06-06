@@ -28,14 +28,24 @@ public class Window {
    Ball a = new Ball(x, y, _radius, gravity * scale);
    everyDynamic.add(a);
  }
+ public void makeBall(int x, int y, PVector xyVelocity, int _radius) {
+   // Creates a ball object, and imbues it with initial xy velocity
+   Ball a = new Ball(x, y, xyVelocity.x, xyVelocity.y, _radius, gravity * scale);
+   everyDynamic.add(a);
+ }
  
  //----------------> Control/Manipulate Methods
  public void recalculateAll() {
    // calls recalculate for every object in everyDynamic
    for(int index = 0; index < everyDynamic.size(); index++) {
      everyDynamic.get(index).recalculate();
-     System.out.println(everyDynamic.get(index).velocity.y);
-     
+     // -- Temporary Bandaid --<>
+     if(everyDynamic.get(index).location.y >= yMax) {
+       everyDynamic.get(index).acceleration.y = 0;
+     } else {
+       everyDynamic.get(index).acceleration.y = gravity * scale;
+     }
+     // -- Temporary Bandaid -- Detects collision with floor, and sets acceleration to 0. Need to create a 
    }
  }
  public void makeAll() {

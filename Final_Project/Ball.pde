@@ -1,6 +1,13 @@
 public class Ball extends DynamicObject {
   public int radius;
   public float gravity;
+  public Ball (int x, int y, float _xVelocity, float _yVelocity, int _radius, float _gravity) {
+    location = new PVector(x, y);
+    radius = _radius;
+    gravity = _gravity;
+    velocity = new PVector(_xVelocity, _yVelocity);
+    acceleration = new PVector(0, gravity);
+  }
   public Ball (int x, int y, int _radius, float _gravity) {
     location = new PVector(x, y);
     radius = _radius;
