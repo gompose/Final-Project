@@ -66,15 +66,10 @@ public class Window {
   }
  }
  public void bounceVertical(DynamicObject obj) {
-   if(obj.velocity.y < 0.001) {
-   }
-   obj.velocity.y = obj.velocity.y * -1.0;
+   obj.velocity.y = obj.velocity.y * -1.0; //Dividing causes ball to fall out of world
  }
  public void bounceHorizontal(DynamicObject obj) {
-   if(obj.velocity.x < 0.001) {
-     obj.velocity.x = 0;
-   }
-    obj.velocity.x = obj.velocity.x * -1.0;
+   obj.velocity.x = obj.velocity.x * -1.0;
  }
  public boolean isColliding() {
    return true;
