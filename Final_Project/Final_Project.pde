@@ -1,10 +1,8 @@
 public Window x;
-public PVector mouseInitialHolder;
-public PVector mouseEndHolder;
+public PVector mouseInitialHolder = new PVector(0,0);
+public PVector mouseEndHolder = new PVector(0,0);
 public PVector mouseResultant;
 public boolean isInteracting = false;
-public float mouseXHolder;
-public float mouseYHolder;
 public PVector testVector;
 
 void setup() {
@@ -24,9 +22,10 @@ void draw() {
   
 }
 
-void mouseClicked() {
+void mousePressed() {
   mouseInitialHolder = new PVector(mouseX, mouseY);
 }
 void mouseReleased() {
   mouseEndHolder = new PVector(mouseX, mouseY);
+  x.makeBall(floor(mouseInitialHolder.x), floor(mouseInitialHolder.y), mouseEndHolder.sub(mouseInitialHolder), 10);
 }

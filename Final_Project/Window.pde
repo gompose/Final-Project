@@ -30,7 +30,7 @@ public class Window {
  }
  public void makeBall(int x, int y, PVector xyVelocity, int _radius) {
    // Creates a ball object, and imbues it with initial xy velocity
-   Ball a = new Ball(x, y, xyVelocity.x, xyVelocity.y, _radius, gravity * scale);
+   Ball a = new Ball(x, y, xyVelocity.x * scale, xyVelocity.y * scale, _radius, gravity * scale);
    everyDynamic.add(a);
  }
  
@@ -46,7 +46,21 @@ public class Window {
        everyDynamic.get(index).acceleration.y = gravity * scale;
      }
      // -- Temporary Bandaid -- Detects collision with floor, and sets acceleration to 0. Need to create a 
+     //Collision Detection
    }
+   
+   //Implement here:
+   //BROKEN! Index out of bounds exception.
+   /*for(int index = 0; index < everyDynamic.size(); index++) {
+     for(int index2 = 0; index < everyDynamic.size(); index2++) {
+       if (index != index2) {
+         if (isColliding(everyDynamic.get(index), everyDynamic.get(index2))){
+           bounce(everyDynamic.get(index), everyDynamic.get(index2));
+         }
+       }
+     }
+   }
+   */
  }
  public void makeAll() {
    // calls make for every object in everyDynamic
@@ -71,8 +85,31 @@ public class Window {
  public void bounceHorizontal(DynamicObject obj) {
    obj.velocity.x = obj.velocity.x * -1.0;
  }
- public boolean isColliding() {
-   return true;
-   // Not Finished
+ public boolean isColliding(DynamicObject obj1, DynamicObject obj2) {
+   boolean truthFactorX = false;
+   boolean truthFactorY = false;
+   int obj1UpperX = floor(obj1.location.x) + obj1.radius;
+   int obj1LowerX = floor(obj1.location.x) - obj1.radius;
+   int obj1UpperY = floor(obj1.location.y) + obj1.radius;
+   int obj1LowerY = floor(obj1.location.y) - obj1.radius;
+   if(obj1UpperX >= floor(obj2.location.x) - obj2.radius) {
+     truthFactorX = true;
+   }
+   if (obj1LowerX <= floor(obj2.location.x) + obj2.radius) {
+     truthFactorX = true;
+   }
+   if (obj1UpperY >= floor(obj2.location.y) - obj2.radius) {
+     truthFactorY = true;
+   }
+   if (obj1LowerY <= floor(obj2.location.y) + obj2.radius) {
+     truthFactorY = true;
+   }
+   return truthFactorX && truthFactorY;
+ }
+ public void bounce(DynamicObject obj1, DynamicObject obj2){
+   obj1.velocity.x = obj1.velocity.x * -1;
+   obj1.velocity.y = obj1.velocity.y * -1;
+   obj2.velocity.x = obj2.velocity.x * -1;
+   obj2.velocity.y = obj2.velocity.y * -1;
  }
 }

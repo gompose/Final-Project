@@ -1,4 +1,5 @@
 public abstract class DynamicObject  {
+  public int radius;
   public PVector location;
   public PVector velocity;
   public PVector acceleration;
